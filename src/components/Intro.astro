@@ -1,0 +1,184 @@
+---
+import { contenido } from '../data/contenido.js';
+const { intro } = contenido;
+---
+
+<div class="intro" id="intro">
+  <div class="intro__inner">
+    <p class="intro__pre">{intro.titulo}</p>
+    <button class="envelope" id="open-btn" aria-label={intro.boton}>
+      <span class="envelope__back"></span>
+      <span class="envelope__letter"></span>
+      <span class="envelope__flap"></span>
+      <span class="envelope__front"></span>
+      <span class="envelope__seal">♡</span>
+    </button>
+    <span class="intro__btn-label">{intro.boton}</span>
+    <p class="intro__nota">{intro.nota}</p>
+  </div>
+</div>
+
+<style>
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: radial-gradient(120% 120% at 50% 30%, var(--ink-soft) 0%, var(--ink) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
+    padding: 1.5rem;
+  }
+  .intro.is-gone {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .intro__inner {
+    text-align: center;
+  }
+  .intro__pre {
+    font-family: var(--script);
+    color: var(--rose);
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    margin-bottom: 2rem;
+  }
+  .envelope {
+    position: relative;
+    width: 200px;
+    height: 132px;
+    margin: 0 auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    transition: transform 0.3s ease;
+    animation: float 3.5s ease-in-out infinite;
+  }
+  .envelope:hover { transform: translateY(-4px) scale(1.03); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .envelope span { position: absolute; left: 0; }
+  .envelope__back {
+    inset: 0;
+    background: var(--rose-deep);
+    border-radius: 8px;
+  }
+  .envelope__letter {
+    top: 8px;
+    left: 10px;
+    width: 180px;
+    height: 86px;
+    background: var(--cream);
+    border-radius: 4px;
+    transition: transform 0.5s ease 0.2s;
+  }
+  .envelope__front {
+    bottom: 0;
+    width: 200px;
+    height: 80px;
+    background: var(--rose);
+    border-radius: 0 0 8px 8px;
+    clip-path: polygon(0 30%, 50% 100%, 100% 30%, 100% 100%, 0 100%);
+    z-index: 3;
+  }
+  .envelope__flap {
+    top: 0;
+    width: 200px;
+    height: 76px;
+    background: var(--rose-deep);
+    clip-path: polygon(0 0, 100% 0, 50% 80%);
+    transform-origin: top;
+    transition: transform 0.5s ease;
+    z-index: 4;
+  }
+  .envelope__seal {
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 34px;
+    margin-left: -17px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+  }
+  /* Estado abierto */
+  .envelope.open .envelope__flap { transform: rotateX(180deg); z-index: 1; }
+  .envelope.open .envelope__seal { opacity: 0; }
+  .envelope.open .envelope__letter { transform: translateY(-40px) scale(1.02); }
+
+  .intro__btn-label {
+    display: inline-block;
+    margin-top: 2.2rem;
+    font-family: var(--sans);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--cream);
+    border: 1px solid rgba(247, 240, 234, 0.3);
+    padding: 0.7rem 1.6rem;
+    border-radius: 100px;
+    transition: background 0.3s ease;
+    pointer-events: none;
+  }
+  .intro__nota {
+    margin-top: 1.6rem;
+    color: var(--cream-dim);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .envelope { animation: none; }
+  }
+</style>
+
+<script>
+  import confetti from 'canvas-confetti';
+
+  const intro = document.getElementById('intro');
+  const btn = document.getElementById('open-btn');
+  // Bloqueamos el scroll hasta que se abra el sobre.
+  document.body.style.overflow = 'hidden';
+
+  let opened = false;
+  function abrir() {
+    if (opened) return;
+    opened = true;
+    btn?.classList.add('open');
+
+    // Confeti en tonos rosados/dorados
+    const colors = ['#e8a0b4', '#c97b94', '#d9b88f', '#f7f0ea'];
+    const burst = (originX: number) =>
+      confetti({
+        particleCount: 70,
+        spread: 75,
+        startVelocity: 45,
+        origin: { x: originX, y: 0.7 },
+        colors,
+      });
+    burst(0.5);
+    setTimeout(() => { burst(0.2); burst(0.8); }, 180);
+    setTimeout(() => confetti({ particleCount: 120, spread: 100, origin: { y: 0.6 }, colors }), 350);
+
+    // Avisar a la música que puede empezar (gesto del usuario)
+    document.dispatchEvent(new CustomEvent('pinky:open'));
+
+    // Revelar la página
+    setTimeout(() => {
+      intro?.classList.add('is-gone');
+      document.body.style.overflow = '';
+    }, 1100);
+  }
+
+  btn?.addEventListener('click', abrir);
+</script>

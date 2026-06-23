@@ -1,0 +1,58 @@
+---
+import { contenido } from '../data/contenido.js';
+const { carta } = contenido;
+---
+
+<section class="carta" id="carta">
+  <div class="carta__inner reveal">
+    <div class="carta__ornament">♡</div>
+    <h2 class="carta__head">{carta.encabezado}</h2>
+    {carta.parrafos.map((p) => <p class="carta__p">{p}</p>)}
+    <p class="carta__firma">{carta.firma}</p>
+    <p class="carta__autor">{carta.autor}</p>
+  </div>
+</section>
+
+<style>
+  .carta {
+    padding: clamp(5rem, 14vw, 9rem) 1.5rem;
+    background:
+      radial-gradient(120% 80% at 50% 0%, var(--ink-soft) 0%, var(--ink) 70%);
+    display: flex;
+    justify-content: center;
+  }
+  .carta__inner {
+    max-width: 38rem;
+    text-align: center;
+  }
+  .carta__ornament {
+    color: var(--rose);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .carta__head {
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  .carta__p {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 3.4vw, 1.5rem);
+    line-height: 1.8;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .carta__firma {
+    margin-top: 2.5rem;
+    color: var(--cream-dim);
+    font-style: italic;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+  }
+  .carta__autor {
+    font-family: var(--script);
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    color: var(--rose);
+    margin-top: 0.2rem;
+  }
+</style>

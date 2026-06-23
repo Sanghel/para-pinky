@@ -1,0 +1,51 @@
+---
+import { contenido } from '../data/contenido.js';
+const { video } = contenido;
+const src = `${import.meta.env.BASE_URL}/${video.archivo}`;
+---
+
+<section class="video" id="video">
+  <div class="video__head reveal">
+    <h2 class="video__titulo">{video.titulo}</h2>
+    <p class="video__sub">{video.subtitulo}</p>
+  </div>
+  <div class="video__frame reveal">
+    <video controls preload="none" playsinline poster={`${import.meta.env.BASE_URL}/video-poster.jpg`}>
+      <source src={src} type="video/mp4" />
+      Tu navegador no puede reproducir el video.
+    </video>
+  </div>
+</section>
+
+<style>
+  .video {
+    padding: clamp(4rem, 12vw, 7rem) 1.5rem;
+    background: radial-gradient(120% 90% at 50% 0%, var(--ink-soft) 0%, var(--ink) 70%);
+    text-align: center;
+  }
+  .video__head {
+    margin-bottom: 2.5rem;
+  }
+  .video__titulo {
+    font-size: clamp(2rem, 7vw, 3rem);
+    font-style: italic;
+  }
+  .video__sub {
+    color: var(--rose);
+    font-family: var(--script);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    margin-top: 0.3rem;
+  }
+  .video__frame {
+    max-width: 820px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    background: #000;
+  }
+  .video__frame video {
+    width: 100%;
+    display: block;
+  }
+</style>

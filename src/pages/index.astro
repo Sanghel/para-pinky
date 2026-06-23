@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Intro from '../components/Intro.astro';
+import Hero from '../components/Hero.astro';
+import Carta from '../components/Carta.astro';
+import Contador from '../components/Contador.astro';
+import Galeria from '../components/Galeria.astro';
+import Video from '../components/Video.astro';
+import Cierre from '../components/Cierre.astro';
+import MusicaToggle from '../components/MusicaToggle.astro';
+import { contenido } from '../data/contenido.js';
+---
+
+<Layout title={`Feliz cumpleaños, ${contenido.apodo} ♡`}>
+  <Intro />
+  <main>
+    <Hero />
+    <Carta />
+    <Contador />
+    <Galeria />
+    <Video />
+    <Cierre />
+  </main>
+  <MusicaToggle />
+</Layout>
+
+<script>
+  // Aparición suave de las secciones al entrar en pantalla
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>

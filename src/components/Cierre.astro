@@ -1,0 +1,56 @@
+---
+import { contenido } from '../data/contenido.js';
+const { cierre } = contenido;
+---
+
+<section class="cierre">
+  <div class="cierre__inner reveal">
+    <div class="cierre__heart">♡</div>
+    <h2 class="cierre__titulo">{cierre.titulo}</h2>
+    <p class="cierre__sub">{cierre.subtitulo}</p>
+    <p class="cierre__firma">{cierre.firma}</p>
+  </div>
+</section>
+
+<style>
+  .cierre {
+    min-height: 70svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(5rem, 14vw, 9rem) 1.5rem;
+    background:
+      radial-gradient(100% 100% at 50% 100%, rgba(201, 123, 148, 0.18) 0%, var(--ink) 60%);
+    text-align: center;
+  }
+  .cierre__heart {
+    color: var(--rose);
+    font-size: 2.4rem;
+    margin-bottom: 1.2rem;
+    animation: beat 2.4s ease-in-out infinite;
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.18); }
+    30% { transform: scale(1); }
+  }
+  .cierre__titulo {
+    font-size: clamp(2.8rem, 11vw, 5.5rem);
+    font-style: italic;
+  }
+  .cierre__sub {
+    font-family: var(--script);
+    color: var(--rose);
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    margin-top: 0.8rem;
+  }
+  .cierre__firma {
+    margin-top: 2.5rem;
+    color: var(--cream-dim);
+    letter-spacing: 0.2em;
+    font-size: 0.95rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cierre__heart { animation: none; }
+  }
+</style>
