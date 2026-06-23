@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import regaloImg from '../assets/regalo.jpg';
 import { contenido } from '../data/contenido.js';
 const { carta } = contenido;
 ---
@@ -10,6 +12,16 @@ const { carta } = contenido;
     {carta.parrafos.map((p) => <p class="carta__p">{p}</p>)}
     <p class="carta__firma">{carta.firma}</p>
     <p class="carta__autor">{carta.autor}</p>
+
+    <figure class="regalo">
+      <div class="regalo__frame">
+        <Image src={regaloImg} alt="Tu regalo" widths={[500, 900]} sizes="(max-width: 600px) 85vw, 420px" />
+      </div>
+      <figcaption class="regalo__cap">
+        <span class="regalo__titulo">{carta.regalo.titulo}</span>
+        <span class="regalo__nota">{carta.regalo.nota}</span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -54,5 +66,52 @@ const { carta } = contenido;
     font-size: clamp(2rem, 6vw, 2.8rem);
     color: var(--rose);
     margin-top: 0.2rem;
+  }
+
+  /* --- Adelanto del regalo, enmarcado --- */
+  .regalo {
+    margin: 3.5rem auto 0;
+    max-width: 26rem;
+  }
+  .regalo__frame {
+    padding: 14px;
+    background: linear-gradient(160deg, #f3e6dc 0%, #e9d6c8 100%);
+    border-radius: 8px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 18px 45px rgba(0, 0, 0, 0.45);
+    position: relative;
+  }
+  .regalo__frame::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(201, 123, 148, 0.45);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .regalo__frame :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+  }
+  .regalo__cap {
+    text-align: center;
+    margin-top: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .regalo__titulo {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--cream-dim);
+  }
+  .regalo__nota {
+    font-family: var(--script);
+    font-size: 1.6rem;
+    color: var(--rose);
   }
 </style>

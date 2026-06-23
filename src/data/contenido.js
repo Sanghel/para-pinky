@@ -25,18 +25,25 @@ export const contenido = {
     subtitulo: 'Hoy cumples 24 y yo cumplo el sueño de tenerte.',
   },
 
-  // --- Carta (BORRADOR: edita libremente cada párrafo) ---
+  // --- Carta (edita libremente cada párrafo) ---
   carta: {
-    encabezado: 'Mi Marysabel',
+    encabezado: 'Para ti, mi amor',
     parrafos: [
-      'Hoy cumples 24 años y no puedo dejar de pensar en lo afortunado que soy de celebrarlos a tu lado. Cada uno de estos años te ha hecho más tú: más fuerte, más hermosa, más mía.',
-      'Hace cinco años empezó lo mejor que me ha pasado. Desde entonces cada día contigo se siente como un regalo, y todavía me sorprende lo mucho que te quiero, un poquito más cada mañana.',
-      'Gracias por tu risa, por tu manera de ver la vida, por hacer que hasta lo simple se vuelva especial. Eres mi lugar favorito.',
-      'Y esto apenas empieza: pronto seremos esposos, y no me imagino caminar hacia el futuro de la mano de nadie más que tú.',
-      'Feliz cumpleaños, mi amor. Que la vida te devuelva toda la luz que tú nos das.',
+      'Mi amor, mi vida, la mujer de mi vida, mi compañera, mi niña hermosa: hoy cumples 24 años y ya son 5 años que Dios me permite celebrar a tu lado y celebrar tu vida.',
+      'Primero que nada quiero disculparme porque no pude organizar el cumpleaños que quisiste y todo lo que querías. También perdóname por no estar físicamente contigo el día de hoy, y lamento mucho todo lo malo que has sentido de mi parte.',
+      'Quiero que sepas que eres la mejor mujer del mundo y que mereces incluso muchísimo más de lo que yo intento darte. Y aunque este pequeño detalle no es la gran cosa, sí demuestra que te dedico lo más valioso que tengo hoy en día: tiempo. Tiempo de hacer una página solo para ti, para tu cumpleaños, para demostrarte —con mi trabajo— algo especial para mí.',
+      'Tu regalo viene en camino, llegará pronto, espero que te guste muchísimo. Es algo que has querido para arreglarte más cómoda, para ponerte bonita y empezar a crear tu espacio solo para ti dentro de nuestro hogar, porque te lo mereces. Trabajas muy duro, haces muchas cosas por mí, por nuestro hogar y por nuestro amor.',
+      'Como te digo, mereces muchísimo más, y quisiera poder darte mucho más, pero créeme que la mayoría de mis esfuerzos son para ti, son por nosotros. Mi única prioridad eres tú, y siempre lo serás.',
+      'En fin, mi amor, quiero que pases un lindo día. Saldremos a comer el miércoles que llegue, para celebrar algo lindo, pero que en general sea un día bonito y estés feliz por ti, por tu vida.',
+      'Te amo mucho. Espero al menos sacarte una sonrisita con esto. Eres la mejor del mundo, mi amor. ¡Gracias, y espero poder celebrar TODA LA VIDA a tu lado!',
     ],
     firma: 'Con todo mi amor,',
     autor: 'Sanghel',
+    // Adelanto del regalo (se muestra enmarcado debajo de la carta)
+    regalo: {
+      titulo: 'Un adelanto de tu regalo',
+      nota: 'Tu espacio, para ti 🤍',
+    },
   },
 
   // --- Contador ---
